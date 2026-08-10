@@ -1,0 +1,1351 @@
+/* =====================================================
+   PREMIUM FUTURISTIC FULL STACK DEVELOPER PORTFOLIO
+===================================================== */
+
+
+/* ================= GOOGLE FONTS ================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+
+/* ================= GLOBAL ================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Inter", sans-serif;
+
+    color: #f8fafc;
+
+    background:
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(37, 99, 235, 0.20),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 85% 25%,
+            rgba(124, 58, 237, 0.18),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 50% 90%,
+            rgba(14, 165, 233, 0.10),
+            transparent 30%
+        ),
+        #030712;
+
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+
+/* =====================================================
+   FUTURISTIC BACKGROUND
+===================================================== */
+
+.background-graphics {
+    position: fixed;
+    inset: 0;
+
+    overflow: hidden;
+
+    pointer-events: none;
+
+    z-index: -10;
+}
+
+
+/* ================= GRID ================= */
+
+.grid {
+    position: absolute;
+    inset: 0;
+
+    background-image:
+        linear-gradient(
+            rgba(59, 130, 246, 0.07) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(59, 130, 246, 0.07) 1px,
+            transparent 1px
+        );
+
+    background-size: 55px 55px;
+
+    mask-image:
+        radial-gradient(
+            ellipse at center,
+            black 20%,
+            transparent 80%
+        );
+
+    animation: gridMove 20s linear infinite;
+}
+
+@keyframes gridMove {
+
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(55px);
+    }
+
+}
+
+
+/* ================= GLOW ORBS ================= */
+
+.glow {
+    position: absolute;
+
+    border-radius: 50%;
+
+    filter: blur(80px);
+
+    animation: glowMove 8s ease-in-out infinite alternate;
+}
+
+.glow-1 {
+    width: 350px;
+    height: 350px;
+
+    background: rgba(37, 99, 235, 0.20);
+
+    top: 5%;
+    left: 5%;
+}
+
+.glow-2 {
+    width: 400px;
+    height: 400px;
+
+    background: rgba(124, 58, 237, 0.18);
+
+    right: 5%;
+    top: 25%;
+
+    animation-delay: 2s;
+}
+
+.glow-3 {
+    width: 300px;
+    height: 300px;
+
+    background: rgba(14, 165, 233, 0.15);
+
+    bottom: 5%;
+    left: 40%;
+
+    animation-delay: 4s;
+}
+
+@keyframes glowMove {
+
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    50% {
+        transform: translate(40px, -30px) scale(1.1);
+    }
+
+    100% {
+        transform: translate(-30px, 40px) scale(0.95);
+    }
+
+}
+
+
+/* ================= LARGE CIRCLES ================= */
+
+.circle {
+    position: absolute;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(96, 165, 250, 0.12);
+}
+
+.circle-1 {
+    width: 500px;
+    height: 500px;
+
+    top: 10%;
+    right: -180px;
+
+    animation: rotateCircle 25s linear infinite;
+}
+
+.circle-2 {
+    width: 700px;
+    height: 700px;
+
+    bottom: -350px;
+    left: -250px;
+
+    border-color: rgba(139, 92, 246, 0.08);
+
+    animation: rotateCircle 35s linear infinite reverse;
+}
+
+@keyframes rotateCircle {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+/* ================= FLOATING DOTS ================= */
+
+.floating-dot {
+    position: absolute;
+
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+
+    background: #60a5fa;
+
+    box-shadow:
+        0 0 15px #3b82f6;
+
+    animation: floatDot 6s ease-in-out infinite;
+}
+
+.dot-1 {
+    top: 20%;
+    left: 30%;
+}
+
+.dot-2 {
+    top: 65%;
+    left: 15%;
+
+    animation-delay: 1s;
+}
+
+.dot-3 {
+    top: 35%;
+    right: 30%;
+
+    animation-delay: 2s;
+}
+
+.dot-4 {
+    bottom: 20%;
+    right: 20%;
+
+    animation-delay: 3s;
+}
+
+@keyframes floatDot {
+
+    0%,
+    100% {
+        transform: translateY(0);
+        opacity: 0.4;
+    }
+
+    50% {
+        transform: translateY(-30px);
+        opacity: 1;
+    }
+
+}
+
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+
+header {
+    position: fixed;
+
+    top: 20px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: min(1150px, 92%);
+
+    z-index: 999;
+
+    background: rgba(10, 15, 32, 0.70);
+
+    backdrop-filter: blur(20px);
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 15px 50px rgba(0, 0, 0, 0.25);
+}
+
+nav {
+    height: 70px;
+
+    padding: 0 25px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+
+/* ================= DK LOGO ================= */
+
+.logo {
+    text-decoration: none;
+}
+
+.logo-box {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 48px;
+    height: 48px;
+
+    border-radius: 12px;
+
+    font-family: "Space Grotesk", sans-serif;
+
+    font-size: 17px;
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+    color: white;
+
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #7c3aed
+    );
+
+    box-shadow:
+        0 8px 30px rgba(59, 130, 246, 0.25);
+
+    transition: 0.3s;
+}
+
+.logo-box:hover {
+    transform: rotate(-5deg) scale(1.08);
+
+    box-shadow:
+        0 12px 40px rgba(59, 130, 246, 0.4);
+}
+
+
+/* ================= NAV LINKS ================= */
+
+nav ul {
+    list-style: none;
+
+    display: flex;
+
+    gap: 8px;
+}
+
+nav ul li a {
+    display: block;
+
+    color: #94a3b8;
+
+    font-size: 14px;
+
+    padding: 9px 14px;
+
+    border-radius: 8px;
+
+    transition: 0.3s;
+}
+
+nav ul li a:hover {
+    color: white;
+
+    background: rgba(59, 130, 246, 0.10);
+}
+
+
+/* =====================================================
+   SECTIONS
+===================================================== */
+
+section {
+    width: min(1200px, 92%);
+
+    min-height: 100vh;
+
+    margin: auto;
+
+    padding: 140px 20px 100px;
+}
+
+
+/* =====================================================
+   HOME
+===================================================== */
+
+#home {
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    overflow: hidden;
+}
+
+.hero-content {
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 100px;
+}
+
+
+/* =====================================================
+   HERO TEXT
+===================================================== */
+
+.hero-text {
+    flex: 1;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+.hero-text p:first-child {
+    display: inline-block;
+
+    padding: 8px 14px;
+
+    margin-bottom: 20px;
+
+    border: 1px solid rgba(96, 165, 250, 0.25);
+
+    border-radius: 100px;
+
+    background: rgba(59, 130, 246, 0.07);
+
+    color: #60a5fa;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    letter-spacing: 1px;
+}
+
+
+/* ================= HERO NAME ================= */
+
+.hero-text h1 {
+    font-family: "Space Grotesk", sans-serif;
+
+    font-size: clamp(55px, 7vw, 90px);
+
+    line-height: 0.95;
+
+    letter-spacing: -5px;
+
+    margin-bottom: 20px;
+
+    background: linear-gradient(
+        120deg,
+        #ffffff,
+        #60a5fa
+    );
+
+    background-clip: text;
+
+    color: transparent;
+}
+
+
+/* ================= DEVELOPER TITLE ================= */
+
+.hero-text h2 {
+    font-family: "Space Grotesk", sans-serif;
+
+    font-size: clamp(25px, 3vw, 40px);
+
+    margin-bottom: 25px;
+
+    background: linear-gradient(
+        90deg,
+        #60a5fa,
+        #a78bfa
+    );
+
+    background-clip: text;
+
+    color: transparent;
+}
+
+
+/* ================= HERO DESCRIPTION ================= */
+
+.hero-text p:nth-of-type(2) {
+    max-width: 600px;
+
+    color: #94a3b8;
+
+    font-size: 17px;
+
+    line-height: 1.8;
+
+    margin-bottom: 35px;
+}
+
+
+/* =====================================================
+   HOME BUTTONS
+===================================================== */
+
+#home a {
+    display: inline-flex;
+
+    align-items: center;
+
+    padding: 14px 22px;
+
+    margin-right: 10px;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    transition: 0.3s;
+}
+
+#home a[href="#projects"] {
+    color: white;
+
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #7c3aed
+    );
+
+    box-shadow:
+        0 10px 35px rgba(59, 130, 246, 0.25);
+}
+
+#home a[href="#projects"]:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 15px 45px rgba(59, 130, 246, 0.35);
+}
+
+#home a[href="#contact"] {
+    color: #cbd5e1;
+
+    border: 1px solid #263244;
+
+    background: rgba(255, 255, 255, 0.02);
+}
+
+#home a[href="#contact"]:hover {
+    color: white;
+
+    border-color: #60a5fa;
+
+    transform: translateY(-4px);
+}
+
+
+/* =====================================================
+   PROFILE IMAGE
+===================================================== */
+
+.hero-image {
+    width: 420px;
+    height: 420px;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+/* ================= PHOTO GLOW ================= */
+
+.hero-image::before {
+    content: "";
+
+    position: absolute;
+
+    width: 280px;
+    height: 280px;
+
+    border-radius: 50%;
+
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #7c3aed
+    );
+
+    filter: blur(80px);
+
+    opacity: 0.30;
+}
+
+
+/* ================= ROTATING RING ================= */
+
+.hero-image::after {
+    content: "";
+
+    position: absolute;
+
+    width: 360px;
+    height: 360px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(96, 165, 250, 0.25);
+
+    border-top-color: #60a5fa;
+
+    animation: rotate 12s linear infinite;
+}
+
+@keyframes rotate {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+
+/* ================= PROFILE PHOTO ================= */
+
+.hero-image img {
+    width: 300px;
+    height: 300px;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+
+    border: 5px solid rgba(255, 255, 255, 0.08);
+
+    outline: 2px solid rgba(96, 165, 250, 0.6);
+
+    position: relative;
+
+    z-index: 2;
+
+    box-shadow:
+        0 0 50px rgba(59, 130, 246, 0.25);
+
+    transition: 0.5s;
+}
+
+.hero-image img:hover {
+    transform: scale(1.04);
+
+    box-shadow:
+        0 0 80px rgba(59, 130, 246, 0.4);
+}
+
+
+/* =====================================================
+   SECTION HEADINGS
+===================================================== */
+
+section > h2 {
+    font-family: "Space Grotesk", sans-serif;
+
+    font-size: 45px;
+
+    letter-spacing: -2px;
+
+    margin-bottom: 50px;
+}
+
+section > h2::after {
+    content: "";
+
+    display: block;
+
+    width: 60px;
+    height: 4px;
+
+    margin-top: 15px;
+
+    border-radius: 20px;
+
+    background: linear-gradient(
+        90deg,
+        #3b82f6,
+        #8b5cf6
+    );
+}
+
+
+/* =====================================================
+   ABOUT
+===================================================== */
+
+#about {
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+}
+
+#about p {
+    max-width: 780px;
+
+    color: #94a3b8;
+
+    font-size: 17px;
+
+    line-height: 1.9;
+
+    margin-bottom: 20px;
+}
+
+
+/* =====================================================
+   SKILLS
+===================================================== */
+
+#skills {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 25px;
+
+    align-content: center;
+}
+
+#skills > h2 {
+    grid-column: 1 / -1;
+}
+
+#skills h3 {
+    color: #60a5fa;
+
+    font-size: 18px;
+
+    margin-bottom: 15px;
+}
+
+#skills ul {
+    list-style: none;
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 10px;
+}
+
+#skills li {
+    padding: 11px 16px;
+
+    border-radius: 10px;
+
+    background: rgba(255, 255, 255, 0.03);
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    color: #cbd5e1;
+
+    font-size: 14px;
+
+    transition: 0.3s;
+}
+
+#skills li:hover {
+    color: white;
+
+    border-color: #3b82f6;
+
+    background: rgba(59, 130, 246, 0.08);
+
+    transform: translateY(-4px);
+}
+
+
+/* =====================================================
+   SERVICES
+===================================================== */
+
+#services {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 25px;
+
+    align-content: center;
+}
+
+#services > h2 {
+    grid-column: 1 / -1;
+}
+
+
+/* =====================================================
+   GLASS CARDS
+===================================================== */
+
+article {
+    position: relative;
+
+    padding: 30px;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 255, 255, 0.055),
+            rgba(255, 255, 255, 0.015)
+        );
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    backdrop-filter: blur(15px);
+
+    overflow: hidden;
+
+    transition: 0.4s;
+}
+
+article::before {
+    content: "";
+
+    position: absolute;
+
+    width: 100px;
+    height: 100px;
+
+    right: -50px;
+    top: -50px;
+
+    background: #3b82f6;
+
+    border-radius: 50%;
+
+    filter: blur(50px);
+
+    opacity: 0;
+
+    transition: 0.4s;
+}
+
+article:hover {
+    transform: translateY(-8px);
+
+    border-color: rgba(96, 165, 250, 0.35);
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.25);
+}
+
+article:hover::before {
+    opacity: 0.3;
+}
+
+article h3 {
+    font-family: "Space Grotesk", sans-serif;
+
+    font-size: 21px;
+
+    margin-bottom: 12px;
+}
+
+article p {
+    color: #94a3b8;
+
+    line-height: 1.7;
+}
+
+
+/* =====================================================
+   PROJECTS
+===================================================== */
+
+#projects {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 25px;
+
+    align-content: center;
+}
+
+#projects > h2 {
+    grid-column: 1 / -1;
+}
+
+#projects article {
+    min-height: 310px;
+
+    display: flex;
+
+    flex-direction: column;
+}
+
+#projects article a {
+    margin-top: auto;
+
+    color: #60a5fa;
+
+    font-weight: 600;
+}
+
+#projects article a:hover {
+    color: white;
+
+    transform: translateX(5px);
+}
+
+
+/* =====================================================
+   EDUCATION
+===================================================== */
+
+#education {
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    gap: 20px;
+}
+
+#education article {
+    max-width: 800px;
+}
+
+
+/* =====================================================
+   CONTACT
+===================================================== */
+
+#contact {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 40px;
+
+    align-content: center;
+}
+
+#contact > h2 {
+    grid-column: 1 / -1;
+}
+
+#contact > p {
+    color: #94a3b8;
+}
+
+
+/* ================= CONTACT FORM ================= */
+
+#contact form {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+#contact label {
+    color: #cbd5e1;
+
+    font-size: 13px;
+}
+
+#contact input,
+#contact textarea {
+    width: 100%;
+
+    padding: 14px 16px;
+
+    color: white;
+
+    background: rgba(255, 255, 255, 0.035);
+
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    border-radius: 10px;
+
+    outline: none;
+
+    font-family: inherit;
+
+    transition: 0.3s;
+}
+
+#contact input:focus,
+#contact textarea:focus {
+    border-color: #3b82f6;
+
+    box-shadow:
+        0 0 0 3px rgba(59, 130, 246, 0.10);
+}
+
+#contact textarea {
+    min-height: 140px;
+
+    resize: vertical;
+}
+
+#contact button {
+    border: none;
+
+    padding: 14px;
+
+    border-radius: 10px;
+
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #7c3aed
+    );
+
+    color: white;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+#contact button:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 12px 35px rgba(59, 130, 246, 0.3);
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer {
+    text-align: center;
+
+    padding: 40px 20px;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+
+    color: #64748b;
+
+    background: rgba(0, 0, 0, 0.2);
+}
+
+footer p:first-child {
+    color: #94a3b8;
+
+    margin-bottom: 5px;
+}
+
+
+/* =====================================================
+   SCROLL ANIMATION
+===================================================== */
+
+section.hidden {
+    opacity: 0;
+
+    transform: translateY(40px);
+
+    transition: 0.8s ease;
+}
+
+section.show {
+    opacity: 1;
+
+    transform: translateY(0);
+}
+
+
+/* =====================================================
+   MOBILE MENU
+===================================================== */
+
+.mobile-menu {
+    display: none;
+
+    border: none;
+
+    background: transparent;
+
+    color: white;
+
+    font-size: 25px;
+
+    cursor: pointer;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 950px) {
+
+    .hero-content {
+        gap: 40px;
+    }
+
+    .hero-image {
+        width: 350px;
+        height: 350px;
+    }
+
+    .hero-image img {
+        width: 250px;
+        height: 250px;
+    }
+
+    .hero-image::after {
+        width: 310px;
+        height: 310px;
+    }
+
+    #services,
+    #projects {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 700px) {
+
+    header {
+        top: 10px;
+    }
+
+    nav {
+        height: 65px;
+
+        padding: 0 18px;
+    }
+
+    nav ul {
+        display: none;
+    }
+
+    .mobile-menu {
+        display: block;
+    }
+
+    nav ul.active {
+        display: flex;
+
+        position: absolute;
+
+        top: 65px;
+        left: 0;
+
+        width: 100%;
+
+        padding: 20px;
+
+        flex-direction: column;
+
+        background: #080b18;
+
+        border: 1px solid rgba(255, 255, 255, 0.08);
+
+        border-radius: 0 0 15px 15px;
+    }
+
+
+    /* ================= SECTIONS ================= */
+
+    section {
+        width: 92%;
+
+        padding: 120px 10px 80px;
+    }
+
+
+    /* ================= HOME ================= */
+
+    #home {
+        padding-top: 130px;
+    }
+
+    .hero-content {
+        flex-direction: column-reverse;
+
+        text-align: center;
+
+        gap: 50px;
+    }
+
+    .hero-text {
+        padding: 0;
+    }
+
+    .hero-text h1 {
+        font-size: 55px;
+
+        letter-spacing: -3px;
+    }
+
+    .hero-text p:nth-of-type(2) {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+
+    /* ================= PHOTO ================= */
+
+    .hero-image {
+        width: 300px;
+        height: 300px;
+    }
+
+    .hero-image img {
+        width: 220px;
+        height: 220px;
+    }
+
+    .hero-image::after {
+        width: 270px;
+        height: 270px;
+    }
+
+
+    /* ================= HEADINGS ================= */
+
+    section > h2 {
+        font-size: 38px;
+    }
+
+
+    /* ================= SKILLS ================= */
+
+    #skills {
+        grid-template-columns: 1fr;
+    }
+
+
+    /* ================= SERVICES ================= */
+
+    #services,
+    #projects {
+        grid-template-columns: 1fr;
+    }
+
+
+    /* ================= CONTACT ================= */
+
+    #contact {
+        grid-template-columns: 1fr;
+    }
+
+    #contact > h2 {
+        grid-column: auto;
+    }
+
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 450px) {
+
+    .hero-text h1 {
+        font-size: 45px;
+    }
+
+    .hero-text h2 {
+        font-size: 25px;
+    }
+
+    .hero-image {
+        width: 260px;
+        height: 260px;
+    }
+
+    .hero-image img {
+        width: 190px;
+        height: 190px;
+    }
+
+    .hero-image::after {
+        width: 230px;
+        height: 230px;
+    }
+
+    #home a {
+        padding: 12px 17px;
+
+        margin-bottom: 10px;
+    }
+
+}
