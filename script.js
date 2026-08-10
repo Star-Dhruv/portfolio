@@ -1,116 +1,264 @@
 
-// ================= TYPING EFFECT =================
 
-const text = "Full Stack Developer";
+document.addEventListener("DOMContentLoaded", () => {
 
-const heading = document.querySelector("#home h2");
 
-let index = 0;
+    /* ================= MOBILE MENU ================= */
 
-function typeText() {
+    const menuBtn =
+        document.querySelector(".menu-btn");
 
-    if (index < text.length) {
+    const navLinks =
+        document.querySelector(".nav-links");
 
-        heading.textContent += text.charAt(index);
 
-        index++;
+    if (menuBtn && navLinks) {
 
-        setTimeout(typeText, 100);
+        menuBtn.addEventListener("click", () => {
+
+            navLinks.classList.toggle("open");
+
+            menuBtn.textContent =
+                navLinks.classList.contains("open")
+                    ? "✕"
+                    : "☰";
+
+        });
+
+
+        navLinks
+            .querySelectorAll("a")
+            .forEach(link => {
+
+                link.addEventListener("click", () => {
+
+                    navLinks.classList.remove("open");
+
+                    menuBtn.textContent = "☰";
+
+                });
+
+            });
 
     }
 
-}
 
-heading.textContent = "";
+    /* ================= ACTIVE NAV ================= */
 
-typeText();
+    const sections =
+        document.querySelectorAll("main section");
+
+    const links =
+        document.querySelectorAll(".nav-links a");
 
 
-// ================= SCROLL REVEAL =================
+    function updateActiveLink() {
 
-const sections = document.querySelectorAll("section");
+        let current = "home";
 
-const observer = new IntersectionObserver(
+        sections.forEach(section => {
 
-    (entries) => {
+            const sectionTop =
+                section.offsetTop - 180;
 
-        entries.forEach((entry) => {
+            if (window.scrollY >= sectionTop) {
 
-            if (entry.isIntersecting) {
-
-                entry.target.classList.add("show");
+                current =
+                    section.getAttribute("id");
 
             }
 
         });
 
-    },
 
-    {
-        threshold: 0.15
+        links.forEach(link => {
+
+            link.classList.remove("active");
+
+            if (
+                link.getAttribute("href")
+                === "#" + current
+            ) {
+
+                link.classList.add("active");
+
+            }
+
+        });
+
     }
 
-);
+
+    window.addEventListener(
+        "scroll",
+        updateActiveLink
+    );
+
+    updateActiveLink();
 
 
-sections.forEach((section) => {
+    /* ================= SCROLL REVEAL ================= */
 
-    section.classList.add("hidden");
-
-    observer.observe(section);
-
-});
-
-
-// ================= MOBILE MENU =================
-
-const nav = document.querySelector("nav");
-
-const menuButton = document.createElement("button");
-
-menuButton.innerHTML = "☰";
-
-menuButton.classList.add("mobile-menu");
-
-nav.appendChild(menuButton);
+    const revealElements =
+        document.querySelectorAll(
+            ".section-heading, " +
+            ".skill-card, " +
+            ".services-grid article, " +
+            ".project-card, " +
+            ".timeline-item, " +
+            ".contact-grid"
+        );
 
 
-menuButton.addEventListener("click", () => {
+    revealElements.forEach(element => {
 
-    const menu = document.querySelector("nav ul");
-
-    menu.classList.toggle("active");
-
-});
-
-
-// ================= CLOSE MENU AFTER CLICK =================
-
-const navLinks = document.querySelectorAll("nav ul li a");
-
-navLinks.forEach((link) => {
-
-    link.addEventListener("click", () => {
-
-        const menu = document.querySelector("nav ul");
-
-        menu.classList.remove("active");
+        element.classList.add("reveal");
 
     });
 
-});
+
+    const observer =
+        new IntersectionObserver(
+            entries => {
+
+                entries.forEach(entry => {
+
+                    if (entry.isIntersecting) {
+
+                        entry.target.classList.add("show");
+
+                        observer.unobserve(
+                            entry.target
+                        );
+
+                    }
+
+                });
+
+            },
+            {
+                threshold: 0.12
+            }
+        );
 
 
-// ================= CONTACT FORM =================
+    revealElements.forEach(element => {
 
-const form = document.querySelector("#contact form");
+        observer.observe(element);
 
-form.addEventListener("submit", (event) => {
+    });
 
-    event.preventDefault();
 
-    alert("Thank you! Your message has been received.");
+    /* ================= CONTACT FORM ================= */
 
-    form.reset();
+    const form =
+        document.getElementById("contact-form");
+
+    const formMessage =
+        document.getElementById("form-message");
+
+
+    if (form) {
+
+        form.addEventListener("submit", event => {
+
+            event.preventDefault();
+
+
+            const name =
+                document.getElementById("name")
+                    .value
+                    .trim();
+
+            const email =
+                document.getElementById("email")
+                    .value
+                    .trim();
+
+            const message =
+                document.getElementById("message")
+                    .value
+                    .trim();
+
+
+            if (!name || !email || !message) {
+
+                formMessage.textContent =
+                    "Please fill in all fields.";
+
+                formMessage.style.color =
+                    "#ff7272";
+
+                return;
+
+            }
+
+
+            const emailPattern =
+                /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+            if (!emailPattern.test(email)) {
+
+                formMessage.textContent =
+                    "Please enter a valid email.";
+
+                formMessage.style.color =
+                    "#ff7272";
+
+                return;
+
+            }
+
+
+            formMessage.textContent =
+                "Thank you, " +
+                name +
+                "! Your message is ready to send.";
+
+            formMessage.style.color =
+                "#55d89a";
+
+
+            form.reset();
+
+        });
+
+    }
+
+
+    /* ================= FOOTER YEAR ================= */
+
+    const year =
+        document.getElementById("year");
+
+
+    if (year) {
+
+        year.textContent =
+            new Date().getFullYear();
+
+    }
+
+
+    /* ================= IMAGE FALLBACK ================= */
+
+    const profileImage =
+        document.querySelector(".hero-image img");
+
+
+    if (profileImage) {
+
+        profileImage.addEventListener(
+            "error",
+            () => {
+
+                profileImage.style.display =
+                    "none";
+
+            }
+        );
+
+    }
 
 });
