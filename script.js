@@ -1,6 +1,6 @@
 /* =========================================================
    DHRUV KHARADI — PROFESSIONAL PORTFOLIO
-   JavaScript
+   OPTIMIZED JAVASCRIPT
 ========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -24,6 +24,20 @@ document.addEventListener("DOMContentLoaded", () => {
     const year = document.getElementById("year");
 
 
+
+    /* =====================================================
+       DEVICE / MOTION SETTINGS
+    ===================================================== */
+
+    const isMobile = window.matchMedia(
+        "(max-width: 650px)"
+    ).matches;
+
+    const reducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+    );
+
+
     /* =====================================================
        MOBILE NAVIGATION
     ===================================================== */
@@ -31,7 +45,10 @@ document.addEventListener("DOMContentLoaded", () => {
     if (menuBtn && navLinks) {
 
         menuBtn.setAttribute("aria-expanded", "false");
-        menuBtn.setAttribute("aria-label", "Open navigation menu");
+        menuBtn.setAttribute(
+            "aria-label",
+            "Open navigation menu"
+        );
 
         menuBtn.addEventListener("click", () => {
 
@@ -280,8 +297,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
         cards.forEach((card, index) => {
 
+            /*
+               Mobile par transition delay kam rakho.
+               Desktop par original stagger effect.
+            */
+
+            const delay =
+                isMobile
+                    ? index * 40
+                    : index * 80;
+
             card.style.transitionDelay =
-                `${index * 80}ms`;
+                `${delay}ms`;
 
         });
 
@@ -498,6 +525,17 @@ document.addEventListener("DOMContentLoaded", () => {
             "click",
             function (event) {
 
+                /*
+                   Mobile par ripple disable.
+                   Isse unnecessary DOM creation
+                   aur animation avoid hogi.
+                */
+
+                if (isMobile) {
+                    return;
+                }
+
+
                 const ripple =
                     document.createElement("span");
 
@@ -568,6 +606,11 @@ document.addEventListener("DOMContentLoaded", () => {
                         "false"
                     );
 
+                    menuBtn.setAttribute(
+                        "aria-label",
+                        "Open navigation menu"
+                    );
+
                 }
 
             }
@@ -579,12 +622,6 @@ document.addEventListener("DOMContentLoaded", () => {
     /* =====================================================
        REDUCED MOTION
     ===================================================== */
-
-    const reducedMotion =
-        window.matchMedia(
-            "(prefers-reduced-motion: reduce)"
-        );
-
 
     if (reducedMotion.matches) {
 
@@ -610,51 +647,239 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-// ================= HERO NUMBER COUNTER =================
 
-const counters = document.querySelectorAll(".counter");
+/* =========================================================
+   HERO NUMBER COUNTER
+   MOBILE OPTIMIZED
+========================================================= */
+
+const counters =
+    document.querySelectorAll(".counter");
+
 
 const startCounters = () => {
 
+    const isMobile =
+        window.matchMedia(
+            "(max-width: 650px)"
+        ).matches;
+
+    const reducedMotion =
+        window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+        ).matches;
+
+
     counters.forEach(counter => {
 
-        const target = Number(counter.dataset.target);
-        let current = 0;
+        const target =
+            Number(counter.dataset.target);
 
-        const duration = 1400;
-        const startTime = performance.now();
+
+        /*
+           MOBILE / REDUCED MOTION
+
+           Directly show final value.
+           No requestAnimationFrame loop.
+        */
+
+        if (
+            isMobile ||
+            reducedMotion
+        ) {
+
+            counter.textContent =
+                target;
+
+            return;
+
+        }
+
+
+        /* DESKTOP COUNTER ANIMATION */
+
+        const duration = 1000;
+
+        const startTime =
+            performance.now();
+
 
         function animate(time) {
 
-            const progress = Math.min(
-                (time - startTime) / duration,
-                1
-            );
+            const progress =
+                Math.min(
+                    (time - startTime) /
+                    duration,
+                    1
+                );
 
-            // Smooth easing
+
             const easedProgress =
-                1 - Math.pow(1 - progress, 3);
+                1 -
+                Math.pow(
+                    1 - progress,
+                    3
+                );
 
-            current = Math.floor(
-                easedProgress * target
-            );
 
-            counter.textContent = current;
+            counter.textContent =
+                Math.floor(
+                    easedProgress * target
+                );
+
 
             if (progress < 1) {
-                requestAnimationFrame(animate);
+
+                requestAnimationFrame(
+                    animate
+                );
+
             } else {
-                counter.textContent = target;
+
+                counter.textContent =
+                    target;
+
             }
+
         }
 
-        requestAnimationFrame(animate);
+
+        requestAnimationFrame(
+            animate
+        );
 
     });
 
 };
 
-// Start when page loads
-window.addEventListener("load", () => {
-    setTimeout(startCounters, 300);
+
+/*
+   Load counter after page is ready.
+   No extra 300ms timeout.
+*/
+
+window.addEventListener(
+    "load",
+    startCounters
+);
+
+/* =========================================================
+   DARK / LIGHT THEME ONLY
+========================================================= */
+
+const themeToggle =
+    document.getElementById("theme-toggle");
+
+const savedTheme =
+    localStorage.getItem("portfolio-theme");
+
+
+/* Load saved theme */
+
+if (savedTheme === "light") {
+    document.documentElement.classList.add("light-mode");
+}
+
+
+/* Update icon */
+
+function updateThemeIcon() {
+
+    if (!themeToggle) return;
+
+    const isLight =
+        document.documentElement.classList.contains(
+            "light-mode"
+        );
+
+    themeToggle.textContent =
+        isLight ? "☀️" : "🌙";
+}
+
+
+/* Initial icon */
+
+updateThemeIcon();
+
+
+/* Toggle */
+
+if (themeToggle) {
+
+    themeToggle.addEventListener("click", () => {
+
+        document.documentElement.classList.toggle(
+            "light-mode"
+        );
+
+        const isLight =
+            document.documentElement.classList.contains(
+                "light-mode"
+            );
+
+        localStorage.setItem(
+            "portfolio-theme",
+            isLight ? "light" : "dark"
+        );
+
+        updateThemeIcon();
+
+    });
+
+}
+/* =========================================================
+   LIGHT / DARK MODE TOGGLE
+   ========================================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const toggleButton = document.getElementById("themeToggle");
+    const themeIcon = document.getElementById("themeIcon");
+    const themeText = document.getElementById("themeText");
+
+    if (!toggleButton) return;
+
+    // Load saved theme
+    const savedTheme = localStorage.getItem("portfolio-theme");
+
+    if (savedTheme === "light") {
+        document.body.classList.add("light-mode");
+        themeIcon.textContent = "☀️";
+        themeText.textContent = "Light";
+    } else {
+        document.body.classList.remove("light-mode");
+        themeIcon.textContent = "🌙";
+        themeText.textContent = "Dark";
+    }
+
+    // Toggle theme
+    toggleButton.addEventListener("click", function () {
+
+        document.body.classList.toggle("light-mode");
+
+        const isLight =
+            document.body.classList.contains("light-mode");
+
+        if (isLight) {
+
+            themeIcon.textContent = "☀️";
+            themeText.textContent = "Light";
+
+            localStorage.setItem(
+                "portfolio-theme",
+                "light"
+            );
+
+        } else {
+
+            themeIcon.textContent = "🌙";
+            themeText.textContent = "Dark";
+
+            localStorage.setItem(
+                "portfolio-theme",
+                "dark"
+            );
+        }
+    });
+
 });
