@@ -5731,23 +5731,3 @@
         }
     }
 
-    /* ================= NAVBAR ICONS ================= */
-
-.nav-links a {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.nav-icon {
-    font-size: 17px;
-    line-height: 1;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-}
-
-.nav-links a:hover .nav-icon {
-    transform: translateY(-3px) scale(1.15);
-}
